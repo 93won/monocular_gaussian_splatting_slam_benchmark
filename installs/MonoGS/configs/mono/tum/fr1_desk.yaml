@@ -1,7 +1,7 @@
 inherit_from: "configs/mono/tum/base_config.yaml"
 
 Dataset:
-  dataset_path: "/workspace/datasets/TUM-RGBD/fr1_desk/"
+  dataset_path: "/workspace/datasets/TUM-RGBD/fr1_desk2/"
   Calibration:
     fx: 517.306408
     fy: 516.469215
