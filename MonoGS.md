@@ -43,19 +43,16 @@ The image includes:
 ### 3. Start Container
 
 ```bash
-./run.sh
-```
-
-Or manually:
-```bash
+cd installs/MonoGS
+docker rm -f monogs_benchmark  # Remove existing container
 docker run -d --name monogs_benchmark \
   --runtime=nvidia --gpus all \
   -e NVIDIA_VISIBLE_DEVICES=all \
   -e NVIDIA_DRIVER_CAPABILITIES=compute,utility,graphics \
   -e DISPLAY=$DISPLAY \
-  -v $(pwd)/../../methods/MonoGS:/workspace/MonoGS \
+  -v $(pwd)/configs:/workspace/MonoGS/configs \
   -v $(pwd)/../../datasets:/workspace/datasets \
-  -v $(pwd)/../../results/MonoGS:/workspace/results \
+  -v $(pwd)/../../results:/workspace/results \
   -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
   --shm-size=8gb \
   --network=host \
@@ -139,12 +136,13 @@ python slam.py --config configs/rgbd/tum/fr1_desk.yaml --eval
 
 Results are saved in:
 ```bash
-~/monocular_gaussian_splatting_slam_benchmark/results/MonoGS/
+~/monocular_gaussian_splatting_slam_benchmark/results/
 ```
 
 Output includes:
 - `trajectory.txt` - Estimated camera trajectory
 - `*.png` - Rendered images
+- `*.ply` - Gaussian point cloud data
 - ATE/RPE evaluation metrics
 - wandb logs (offline mode)
 
