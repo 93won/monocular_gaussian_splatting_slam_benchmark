@@ -52,7 +52,7 @@ docker run -d --name monogs_benchmark \
   -e DISPLAY=$DISPLAY \
   -v $(pwd)/configs:/workspace/MonoGS/configs \
   -v $(pwd)/../../datasets:/workspace/datasets \
-  -v $(pwd)/../../results:/workspace/MonoGS/results \
+  -v $(pwd)/../../results:/workspace/results \
   -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
   --shm-size=8gb \
   --network=host \
