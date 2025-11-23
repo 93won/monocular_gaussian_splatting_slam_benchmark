@@ -1,0 +1,32 @@
+###############################################################################
+# @file      docker-compose.yml
+# @brief     Docker Compose configuration for MonoGS benchmark environment
+# @author    Seungwon Choi
+# @email     csw3575@snu.ac.kr
+# @date      2025-11-23
+# @copyright Seungwon Choi. All rights reserved.
+###############################################################################
+
+version: '3.8'
+
+services:
+  monogs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: monogs:latest
+    container_name: monogs_benchmark
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility,graphics
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - ../../methods/MonoGS:/workspace/MonoGS
+      - ../../datasets:/workspace/datasets
+      - ../../results/MonoGS:/workspace/results
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    shm_size: '8gb'
+    stdin_open: true
+    tty: true
+    network_mode: host
